@@ -1,0 +1,28 @@
+GET http://localhost:8081/api/smewallets/wallets/findAll
+Content-Type: application/json
+###
+
+GET https:// 81.199.16.73/api/smewallets/wallets/findAll
+Content-Type: application/json
+
+###
+
+
+GET http://localhost:8081/api/smewallets/wallets/findById/2
+Content-Type: application/json
+
+###
+
+#,"emailVerifiedAt":"2019-11-21 10:01:09.626"
+
+POST http://localhost:8081/api/smewallets/wallets/create
+Content-Type: application/json
+
+{
+  "id" : 0,
+  "user":{"id":17,"email":"samkib@gmail.com","password":"pass","phoneNumber":"0756","refUserId":130,"name":"Samson Kibrom Arsanios", "timestampStr": "2019-11-21 10:01:09"},
+  "name" : "Bank Wallet"
+
+}
+
+###
