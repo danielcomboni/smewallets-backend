@@ -25,7 +25,10 @@ class WalletController : CRUDAbstract<Wallet>() {
     @PostMapping("/create")
     override fun create(@RequestBody anObject: Wallet): ResponseEntity<*> = JSONUtilsKT.ok(this.walletRepository.saveAndFlush(anObject))
 
-    @PutMapping("/update/{id}")
-    fun updatE(@RequestBody anObject: Wallet, @PathVariable id:BigDecimal): ResponseEntity<*> = JSONUtilsKT.ok(this.walletRepository.saveAndFlush(anObject));
+    @PutMapping("/update")
+    override fun update(@RequestBody anObject: Wallet): ResponseEntity<*> = JSONUtilsKT.ok(this.walletRepository.saveAndFlush(anObject))
+
+    @DeleteMapping("/delete/{id}")
+    override fun deleteById(@PathVariable id: BigDecimal): ResponseEntity<*> = JSONUtilsKT.ok(this.walletRepository.deleteById(id))
 
 }
