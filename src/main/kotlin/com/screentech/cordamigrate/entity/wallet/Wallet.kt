@@ -18,4 +18,8 @@ class Wallet(
         @JoinColumn(name = "user_id") var user : User?,
         @Transient var timestampStr:String? = ""
 
-        )
+        ){
+    override fun toString(): String {
+        return "Wallet(id=$id, name=$name, timestamp=$timestamp, user=$user, timestampStr=$timestampStr)"
+    }
+}
