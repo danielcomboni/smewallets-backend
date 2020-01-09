@@ -17,7 +17,7 @@ import java.math.BigDecimal
          TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
      }
 
-     override fun findById(id: BigDecimal): ResponseEntity<*> {
+     override fun findById(id: Long): ResponseEntity<*> {
          TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
      }
 
@@ -25,7 +25,7 @@ import java.math.BigDecimal
          TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
      }
 
-     override fun deleteById(id: BigDecimal): ResponseEntity<*> {
+     override fun deleteById(id: Long): ResponseEntity<*> {
          TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
      }
 

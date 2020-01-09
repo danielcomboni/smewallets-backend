@@ -16,7 +16,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8081/api/smewallets/users
+POST http://localhost:8081/api/smewallets/users/create
 Content-Type: application/json
 
 {
