@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-interface SessionRepository : JpaRepository<Session,BigDecimal> {
+interface SessionRepository : JpaRepository<Session,Long> {
 
 //    fun findByEmail(email : String) : Session
 

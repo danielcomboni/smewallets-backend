@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-interface PermissionRepository : JpaRepository<Permission, BigDecimal>{
+interface PermissionRepository : JpaRepository<Permission, Long>{
 
 
 

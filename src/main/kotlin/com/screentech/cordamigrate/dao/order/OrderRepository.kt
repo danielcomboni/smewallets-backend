@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-interface OrderRepository : JpaRepository<Order, BigDecimal> {
+interface OrderRepository : JpaRepository<Order, Long> {
     fun findByIsbnNumber(isbnNumberFormatException : String) : ResponseEntity<*>
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-interface SupplierOrderRepository : JpaRepository<SupplierOrder,BigDecimal> {
+interface SupplierOrderRepository : JpaRepository<SupplierOrder,Long> {
 
     fun findByEmail(email:String) : ResponseEntity<*>
 }

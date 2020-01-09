@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-interface RegistrationRepository : JpaRepository<Registration,BigDecimal>{
+interface RegistrationRepository : JpaRepository<Registration,Long>{
     fun findRegistrationByEmail(email : String) : Registration
 }
