@@ -26,7 +26,7 @@ class InvitesController : CRUDAbstract<Invite>(){
     override fun findAll(): ResponseEntity<*> = JSONUtilsKT.ok(this.invitesRepository.findAll())
 
     @GetMapping("/findById/{id}")
-    override fun findById(@PathVariable id: BigDecimal): ResponseEntity<*> = JSONUtilsKT.ok(this.invitesRepository.findById(id))
+    override fun findById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.invitesRepository.findById(id))
 
     @GetMapping("/findByEmail/{email}")
     override fun findByEmail(@PathVariable email: String): ResponseEntity<*> = JSONUtilsKT.ok(this.invitesRepository.findByEmail(email))

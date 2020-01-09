@@ -66,7 +66,7 @@ class InvoiceController : CRUDAbstract<Invoice>() {
      * @return ResponseEntity
      */
     @DeleteMapping("/delete/{id}")
-    override fun deleteById(@PathVariable id: BigDecimal): ResponseEntity<*>  = JSONUtilsKT.ok(this.invoiceRepository.deleteById(id))
+    override fun deleteById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.invoiceRepository.deleteById(id))
 
 
     /**
