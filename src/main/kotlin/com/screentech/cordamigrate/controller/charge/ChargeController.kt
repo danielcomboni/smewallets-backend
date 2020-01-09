@@ -36,6 +36,6 @@ class ChargeController : CRUDAbstract<Charge>() {
     override fun findAll(): ResponseEntity<*>  = JSONUtilsKT.ok(this.chargeRepository.findAll())
 
     @GetMapping("/findById/{id}")
-    override fun findById(@PathVariable id: BigDecimal): ResponseEntity<*> = JSONUtilsKT.ok(this.chargeRepository.findById(id))
+    override fun findById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.chargeRepository.findById(id))
 
 }

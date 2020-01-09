@@ -10,21 +10,21 @@ import javax.persistence.*
 @Table(name="users")
 class User (
 
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") var id : BigDecimal?,
-        @Column(name="email") var email : String,
-        @Column(name="email_verified_at") var emailVerifiedAt: Timestamp? = getCurrentTimestampSQL(),
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") var id : Long?,
+
+        @Column(name="email", columnDefinition = "varchar(255)") var email : String,
+        @Column(name="email_verified_at", columnDefinition = "timestamp default now()") var emailVerifiedAt: Timestamp? = getCurrentTimestampSQL(),
         @Transient var emailVerifiedAtStr : String?,
-
-
-        @Column(name="password") var  password : String,
-        @Column(name="phone_number") var phoneNumber : String,
+        @Column(name="password", columnDefinition = "text") var  password : String,
+        @Column(name="phone_number", columnDefinition = "varchar(255)") var phoneNumber : String,
         @Column(name="ref_user_id") var refUserId:BigDecimal,
-        @Column(name = "name") var name:String
+        @Column(name = "name", columnDefinition = "text") var name:String,
+        @Column(name = "user_type", columnDefinition = "varchar(255)") var userType : String
 
 )
 {
-
     override fun toString(): String {
-        return "User(id=$id, email='$email', emailVerifiedAt=$emailVerifiedAt, password='$password', phoneNumber='$phoneNumber', refUserId=$refUserId, name='$name')"
+        return "User(id=$id, email='$email', emailVerifiedAt=$emailVerifiedAt, emailVerifiedAtStr=$emailVerifiedAtStr, password='$password', phoneNumber='$phoneNumber', refUserId=$refUserId, name='$name')"
     }
+
 }

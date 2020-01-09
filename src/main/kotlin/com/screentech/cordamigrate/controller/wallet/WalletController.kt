@@ -20,7 +20,7 @@ class WalletController : CRUDAbstract<Wallet>() {
     override fun findAll(): ResponseEntity<*>  = JSONUtilsKT.ok(this.walletRepository.findAll())
 
     @GetMapping("/findById/{id}")
-    override fun findById(@PathVariable id: BigDecimal): ResponseEntity<*> = JSONUtilsKT.ok(this.walletRepository.findById(id))
+    override fun findById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.walletRepository.findById(id))
 
     @PostMapping("/create")
     override fun create(@RequestBody anObject: Wallet): ResponseEntity<*> = JSONUtilsKT.ok(this.walletRepository.saveAndFlush(anObject))
@@ -29,6 +29,6 @@ class WalletController : CRUDAbstract<Wallet>() {
     override fun update(@RequestBody anObject: Wallet): ResponseEntity<*> = JSONUtilsKT.ok(this.walletRepository.saveAndFlush(anObject))
 
     @DeleteMapping("/delete/{id}")
-    override fun deleteById(@PathVariable id: BigDecimal): ResponseEntity<*> = JSONUtilsKT.ok(this.walletRepository.deleteById(id))
+    override fun deleteById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.walletRepository.deleteById(id))
 
 }

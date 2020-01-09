@@ -8,8 +8,9 @@ import javax.persistence.*
 @Entity
 @Table(name = "permissions")
 class Permission(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") var id : BigDecimal,
-        @Column(name = "name") var name : String,
-        @Column(name = "guard_name") var guardName : String,
-        @Column(name = "the_timestamp") var timestamp: Timestamp = getCurrentTimestampSQL()
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") var id : Long,
+        @Column(name = "name",columnDefinition = "text") var name : String,
+        @Column(name = "guard_name",columnDefinition = "text") var guardName : String,
+        @Column(name = "the_timestamp") var timestamp: Timestamp? = getCurrentTimestampSQL(),
+        @Transient var timestampStr : String?
 )

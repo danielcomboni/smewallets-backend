@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-interface UserRepository : JpaRepository<User, BigDecimal> {
+interface UserRepository : JpaRepository<User, Long> {
 
     fun findUsersByEmail(email:String) : List<User>
 

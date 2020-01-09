@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.http.ResponseEntity
 import java.math.BigDecimal
 
-interface InvitesRepository : JpaRepository<Invite, BigDecimal> {
+interface InvitesRepository : JpaRepository<Invite, Long> {
     fun findByEmail(email : String) : ResponseEntity<*>
 }

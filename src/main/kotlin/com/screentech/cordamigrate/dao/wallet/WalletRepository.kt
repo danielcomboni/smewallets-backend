@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-interface WalletRepository : JpaRepository<Wallet , BigDecimal> {
+interface WalletRepository : JpaRepository<Wallet , Long> {
 
 }

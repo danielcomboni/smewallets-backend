@@ -7,18 +7,19 @@ import java.sql.Timestamp
 import javax.persistence.*
 
 @Entity
-@Table
+@Table(name = "wallets")
 class Wallet(
 
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id") var id : BigDecimal?,
-        @Column(name = "name") var name : String?,
-        @Column(name = "the_timestamp") var timestamp: Timestamp? = getCurrentTimestampSQL(),
+        @Column(name = "id") var id : Long?,
+        @Column(name = "name", columnDefinition = "text") var name : String?,
+        @Column(name = "the_timestamp", columnDefinition = "timestamp default now()") var timestamp: Timestamp? = getCurrentTimestampSQL(),
         @ManyToOne(cascade = arrayOf(CascadeType.PERSIST))
         @JoinColumn(name = "user_id") var user : User?,
         @Transient var timestampStr:String? = ""
 
         ){
+
     override fun toString(): String {
         return "Wallet(id=$id, name=$name, timestamp=$timestamp, user=$user, timestampStr=$timestampStr)"
     }

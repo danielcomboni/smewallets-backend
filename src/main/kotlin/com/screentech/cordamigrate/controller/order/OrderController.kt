@@ -26,7 +26,7 @@ class OrderController : CRUDAbstract<Order>(){
     override fun findAll(): ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findAll())
 
     @GetMapping("/findById/{id}")
-    override fun findById(@PathVariable id: BigDecimal): ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findById(id))
+    override fun findById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findById(id))
 
     @GetMapping("/findByIsbnNumber/{isbnNumber}")
     fun findByIsbnNumber(@PathVariable isbnNumber : String) : ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findByIsbnNumber(isbnNumber))

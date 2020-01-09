@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-interface PasswordResetRepository : JpaRepository<PasswordReset, BigDecimal> {
+interface PasswordResetRepository : JpaRepository<PasswordReset, Long> {
 
 }

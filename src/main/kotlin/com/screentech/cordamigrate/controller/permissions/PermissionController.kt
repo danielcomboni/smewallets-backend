@@ -26,5 +26,5 @@ class PermissionController : CRUDAbstract<Permission>() {
     override fun findAll(): ResponseEntity<*> = JSONUtilsKT.ok(this.permissionRepository.findAll())
 
     @GetMapping("/findById/{id}")
-    override fun findById(@PathVariable id: BigDecimal): ResponseEntity<*>  = JSONUtilsKT.ok(this.permissionRepository.findById(id))
+    override fun findById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.permissionRepository.findById(id))
 }

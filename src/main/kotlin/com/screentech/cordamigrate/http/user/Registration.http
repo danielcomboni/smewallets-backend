@@ -3,12 +3,14 @@ Content-Type: application/json
 
 ###
 
+#  "user" : {"id":1,"email":"samarsanios@gmail.com","emailVerifiedAtStr":"2020-01-08 7:47:25","password":"passs","phoneNumber":"0755","refUserId":103,"name":"Samson Arsanios Samson"}
+
 POST http://localhost:8081/api/smewallets/registrations/create
 Content-Type: application/json
 
 {
-  "id": 0,
-  "userId" : 17,
+
+  "user" : {"id":1,"email":"samarsanios@gmail.com","emailVerifiedAtStr":"2020-01-08 7:47:25","password":"passs","phoneNumber":"0755","refUserId":103,"name":"Samson Arsanios Samson"},
   "industryType" : "agric",
   "name" : "Jacob",
   "email" : "jacobokia@test.com",
@@ -67,7 +69,6 @@ GET http://localhost:8081/api/smewallets/registrations/findById/1
 ###
 
 GET http://localhost:8081/api/smewallets/registrations/findByEmail/jacobokia@test.com
-
 
 
 ###

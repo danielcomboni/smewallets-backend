@@ -10,11 +10,11 @@ import javax.persistence.*
 @Table(name = "invites")
 class Invite(
 
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") var id : BigDecimal,
-        @ManyToOne(cascade = arrayOf(CascadeType.PERSIST)) @JoinColumn(name = "user_id") var user: User,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") var id : Long,
+        @ManyToOne(cascade = arrayOf(CascadeType.PERSIST), fetch = FetchType.LAZY) @JoinColumn(name = "user_id") var user: User,
         @Column(name = "invite_code") var inviteCode : String,
-        @Column(name = "name") var name : String,
+        @Column(name = "name", columnDefinition = "text") var name : String,
         @Column(name = "email") var email : String,
-        @Column(name = "the_timestamp") var timestamp: Timestamp = getCurrentTimestampSQL()
-
+        @Column(name = "the_timestamp", columnDefinition = "timestamp default now()") var timestamp: Timestamp? = getCurrentTimestampSQL(),
+        @Transient var timestampStr : String?
 )
