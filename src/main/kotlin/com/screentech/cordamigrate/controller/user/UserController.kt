@@ -4,15 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired
 import com.screentech.cordamigrate.dao.user.UserRepository;
 import com.screentech.cordamigrate.entity.user.User
 import com.screentech.cordamigrate.service.user.UserServiceImpl
+import com.screentech.cordamigrate.utility.CRUDAbstract
 import com.screentech.cordamigrate.utility.JSONUtils
 import com.screentech.cordamigrate.utility.JSONUtilsKT
+import com.screentech.cordamigrate.utility.parseStringToTimestamp
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.math.BigDecimal
 
 @RestController
 @RequestMapping("/api/smewallets/users")
-class UserController{
+class UserController : CRUDAbstract<User>(){
 
     @Autowired
     lateinit var userServiceImpl: UserServiceImpl
@@ -21,7 +23,10 @@ class UserController{
     lateinit var userRepository: UserRepository
 
     @PostMapping("/create")
-    fun createNewUser(@RequestBody user : User) : ResponseEntity<*> =  JSONUtilsKT.ok(this.userServiceImpl.createNewUser(user))
+    override fun create(anObject: User): ResponseEntity<*> {
+        anObject.emailVerifiedAt = parseStringToTimestamp(anObject.emailVerifiedAtStr);
+        return JSONUtilsKT.ok(this.userRepository.save(anObject))
+    }
 
     @PutMapping("/update")
     fun updateAUser(@RequestBody user: User) : ResponseEntity<*> = JSONUtilsKT.ok(this.userRepository.save(user))
@@ -30,7 +35,7 @@ class UserController{
     fun deleteAUser(@RequestBody user: User) : ResponseEntity<*> = JSONUtilsKT.ok(this.userRepository.delete(user))
 
     @GetMapping("/findAll")
-    fun findAllUsers() : ResponseEntity<*> = JSONUtilsKT.ok(this.userRepository.findAll())
+    override fun findAll() : ResponseEntity<*> = JSONUtilsKT.ok(this.userRepository.findAll())
 
     @GetMapping("/findUserByEmail/{email}")
     fun findUserByEmail(@PathVariable email:String) : ResponseEntity<*> = JSONUtilsKT.ok(this.userRepository.findUsersByEmail(email))
