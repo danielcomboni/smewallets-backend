@@ -20,7 +20,7 @@ class UserController : CRUDAbstract<User>(){
     lateinit var userRepository: UserRepository
 
     @PostMapping("/create")
-    override fun create(anObject: User): ResponseEntity<*> {
+    override fun create(@RequestBody anObject: User): ResponseEntity<*> {
         anObject.emailVerifiedAt = getCurrentTimestampSQL()
         return JSONUtilsKT.ok(this.userRepository.save(anObject))
     }
