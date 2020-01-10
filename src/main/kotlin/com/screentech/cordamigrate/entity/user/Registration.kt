@@ -20,7 +20,7 @@ class Registration(
         @Column(name = "email", columnDefinition = "text") var email : String?,
         @Column(name = "address", columnDefinition = "text") var address : String?,
         @Column(name = "contact_number", columnDefinition = "text") var contactNumber : String?,
-        @Column(name = "city", columnDefinition = "varchar(255)") var city : String,
+        @Column(name = "city", columnDefinition = "varchar(255)") var city : String?,
         @Column(name = "state", columnDefinition = "text") var state : String?,
         @Column(name = "country", columnDefinition = "text") var country : String?,
         @Column(name = "zip", columnDefinition = "varchar(255)") var zip : String?,
