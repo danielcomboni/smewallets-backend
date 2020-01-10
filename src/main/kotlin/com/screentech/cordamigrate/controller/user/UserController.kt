@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import com.screentech.cordamigrate.dao.user.UserRepository;
 import com.screentech.cordamigrate.entity.user.User
 import com.screentech.cordamigrate.service.user.UserServiceImpl
-import com.screentech.cordamigrate.utility.CRUDAbstract
-import com.screentech.cordamigrate.utility.JSONUtils
-import com.screentech.cordamigrate.utility.JSONUtilsKT
-import com.screentech.cordamigrate.utility.parseStringToTimestamp
+import com.screentech.cordamigrate.utility.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.math.BigDecimal
@@ -24,7 +21,7 @@ class UserController : CRUDAbstract<User>(){
 
     @PostMapping("/create")
     override fun create(anObject: User): ResponseEntity<*> {
-        anObject.emailVerifiedAt = parseStringToTimestamp(anObject.emailVerifiedAtStr);
+        anObject.emailVerifiedAt = getCurrentTimestampSQL()
         return JSONUtilsKT.ok(this.userRepository.save(anObject))
     }
 
