@@ -13,7 +13,7 @@ class User (
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") var id : Long?,
 
         @Column(name="email", columnDefinition = "varchar(255)") var email : String,
-        @Column(name="email_verified_at", columnDefinition = "timestamp default now()") var emailVerifiedAt: Timestamp? = getCurrentTimestampSQL(),
+        @Column(name="email_verified_at", columnDefinition = "timestamp default now() not null") var emailVerifiedAt: Timestamp? = getCurrentTimestampSQL(),
         @Transient var emailVerifiedAtStr : String?,
         @Column(name="password", columnDefinition = "text") var  password : String,
         @Column(name="phone_number", columnDefinition = "varchar(255)") var phoneNumber : String,
