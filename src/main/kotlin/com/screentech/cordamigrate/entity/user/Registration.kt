@@ -33,7 +33,7 @@ class Registration(
         @Column(name="cr_name", columnDefinition = "text") var crName : String?,
         @Column(name = "company_email", columnDefinition = "text") var companyEmail : String?,
         @Column(name = "company_address", columnDefinition = "text") var companyAddress : String?,
-        @Column(name = "the_timestamp",columnDefinition = "timestamp default now()") var timestamp : Timestamp? = getCurrentTimestampSQL(),
+        @Column(name = "the_timestamp",columnDefinition = "timestamp default now() not null") var timestamp : Timestamp? = getCurrentTimestampSQL(),
         @Transient var timestampStr:String?
 
 ){

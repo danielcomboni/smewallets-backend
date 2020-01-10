@@ -4,6 +4,7 @@ import com.screentech.cordamigrate.dao.user.RegistrationRepository
 import com.screentech.cordamigrate.entity.user.Registration
 import com.screentech.cordamigrate.utility.CRUDAbstract
 import com.screentech.cordamigrate.utility.JSONUtilsKT
+import com.screentech.cordamigrate.utility.getCurrentTimestampSQL
 import com.screentech.cordamigrate.utility.parseStringToTimestamp
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -20,6 +21,7 @@ class RegistrationController : CRUDAbstract<Registration>(){
     @PostMapping("/create")
     override fun create(@RequestBody anObject: Registration): ResponseEntity<*> {
         anObject.user.emailVerifiedAt = parseStringToTimestamp(anObject.user.emailVerifiedAtStr)
+        anObject.timestamp = getCurrentTimestampSQL()
         return JSONUtilsKT.ok(this.registrationRepository.save(anObject))
     }
 
