@@ -1,0 +1,33 @@
+GET http://localhost:8081/api/smewallets/orders/findAll
+
+###
+
+POST http://localhost:8081/api/smewallets/orders/create
+Content-Type: application/json
+
+{
+   "id" : 0,
+  "buyer": {"id":1,"email":"samarsanios@gmail.com","emailVerifiedAtStr":"2020-01-13 2:54:20","password":"passs","phoneNumber":"0755","refUserId":103,"name":"Samson Arsanios Samson","userType":"buyer"},
+  "supplier": {"id":2,"email":"kalungi2k6@gmail.com","emailVerifiedAtStr":"2020-01-13 2:57:05","password":"passs","phoneNumber":"0705","refUserId":104,"name":"Deb","userType":"supplier"},
+  "isbnNumber": null,
+  "itemName": "test item name",
+  "itemDescription":"the item description",
+  "billingAddress": " the billing address",
+  "saleUnit": "sale unit",
+  "quantity": 2,
+  "department": "tye department ",
+  "conveyanceMethod" : "the conveyance method",
+  "deliveryTerms": "the delivery terms",
+  "paymentTerms":"the payment terms",
+  "placeOfDelivery":"place of delivery",
+
+  "qrCode":"the qr code",
+  "wallet": {"id":1,"name":"Bank Wallet","timestampStr":"2020-01-13 3:08:45","user":{"id":1,"email":"samarsanios@gmail.com","emailVerifiedAtStr":"2020-01-13 2:54:20","password":"passs","phoneNumber":"0755","refUserId":103,"name":"Samson Arsanios Samson","userType":"buyer"}}
+,
+  "orderStatus" : "the order status",
+  "raiseInvoice" : "raise invoice",
+  "notificationStatus" : "the notification status"
+
+}
+
+###
