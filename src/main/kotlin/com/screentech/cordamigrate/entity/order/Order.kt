@@ -33,5 +33,6 @@ class Order(
         @Column(name = "raise_invoice",columnDefinition = "text") var raiseInvoice : String?,
         @Column(name = "notification_status",columnDefinition = "text") var notificationStatus : String?,
         @Column(name = "the_timestamp") var timestamp: Timestamp? = getCurrentTimestampSQL(),
+        @Column(name = "industry_type") var industryType: String?,
         @Transient var timestampStr : String?
         )
