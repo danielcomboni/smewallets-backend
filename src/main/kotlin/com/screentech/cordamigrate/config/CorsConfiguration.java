@@ -15,7 +15,7 @@ public class CorsConfiguration {
             public void addCorsMappings(CorsRegistry registry) {
 //                https://objective-swirles-0b6238.netlify.com
                 registry.addMapping("/**")
-                        .allowedOrigins("http:localhost:4200")
+                        .allowedOrigins("http://localhost:4200")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD").allowCredentials(true)
                 ;
             }
