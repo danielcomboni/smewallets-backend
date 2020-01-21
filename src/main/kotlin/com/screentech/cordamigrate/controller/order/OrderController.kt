@@ -20,8 +20,8 @@ class OrderController : CRUDAbstract<Order>(){
 
     @PostMapping("/create")
     override fun create(@RequestBody anObject: Order): ResponseEntity<*> {
-        anObject.buyer.emailVerifiedAt = parseStringToTimestamp(anObject.buyer.emailVerifiedAtStr)
-        anObject.supplier.emailVerifiedAt = parseStringToTimestamp(anObject.supplier.emailVerifiedAtStr)
+        anObject.buyer?.emailVerifiedAt = parseStringToTimestamp(anObject.buyer?.emailVerifiedAtStr)
+        anObject.supplier?.emailVerifiedAt = parseStringToTimestamp(anObject.supplier?.emailVerifiedAtStr)
         anObject.timestamp = getCurrentTimestampSQL()
       return JSONUtilsKT.ok(this.orderRepository.save(anObject))
     }
