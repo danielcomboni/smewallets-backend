@@ -22,7 +22,7 @@ maven-build:
 docker-build:
   stage: package
   script:
-    - docker build -t registry.gitlab.com/marcolenzo/actuator-sample .
+    - docker build -t registry.gitlab.com/marcolenzo/container-cordamigrate .
 #    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
 #    - docker push registry.gitlab.com/marcolenzo/actuator-sample
 
