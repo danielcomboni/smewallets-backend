@@ -22,10 +22,11 @@ maven-build:
 docker-build:
   stage: package
   script:
+#     - docker login registry.gitlab.com -u corda_test_token -p
      - docker build -t registry.gitlab.com/comboni/smewallets-backend .
      - docker push registry.gitlab.com/comboni/smewallets-backend
 #    - docker build -t registry.gitlab.com/marcolenzo/container-cordamigrate .
-#    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
 #    - docker push registry.gitlab.com/marcolenzo/actuator-sample
 
 #k8s-deploy:
