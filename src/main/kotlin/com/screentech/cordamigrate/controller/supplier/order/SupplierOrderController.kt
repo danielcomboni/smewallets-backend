@@ -28,6 +28,6 @@ class SupplierOrderController : CRUDAbstract<SupplierOrder>(){
     @GetMapping("/findById/{id}")
     override fun findById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.supplierOrderRepository.findById(id))
 
-    @GetMapping("findByEmail/{email}")
-    override fun findByEmail(@PathVariable email: String): ResponseEntity<*>  = JSONUtilsKT.ok(this.supplierOrderRepository.findByEmail(email))
+//    @GetMapping("findByEmail/{email}")
+//    override fun findByEmail(@PathVariable email: String): ResponseEntity<*>  = JSONUtilsKT.ok(this.supplierOrderRepository.findByEmail(email))
 }
