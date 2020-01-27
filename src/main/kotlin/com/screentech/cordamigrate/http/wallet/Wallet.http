@@ -20,7 +20,7 @@ Content-Type: application/json
 
 {
   "id" : 0,
-  "user" : {"id":1,"email":"samarsanios@gmail.com","emailVerifiedAtStr":"2020-01-13 2:54:20","password":"passs","phoneNumber":"0755","refUserId":103,"name":"Samson Arsanios Samson","userType":"buyer"},
+"user": {"id":2,"email":"samson@gmail.com","emailVerifiedAtStr":"2020-01-13 11:15:18","password":"passs","phoneNumber":"0705","refUserId":104,"name":"Samson","userType":"buyer"},
   "name" : "Bank Wallet"
 
 }
