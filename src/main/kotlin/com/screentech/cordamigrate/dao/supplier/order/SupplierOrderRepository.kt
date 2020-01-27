@@ -9,5 +9,5 @@ import java.math.BigDecimal
 @Service
 interface SupplierOrderRepository : JpaRepository<SupplierOrder,Long> {
 
-    fun findByEmail(email:String) : ResponseEntity<*>
+//    fun findByEmail(email:String) : ResponseEntity<*>
 }
