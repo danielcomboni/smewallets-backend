@@ -9,11 +9,15 @@ import com.screentech.cordamigrate.utility.parseStringToTimestamp
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.messaging.simp.SimpMessagingTemplate
 import java.math.BigDecimal
 
 @RestController
 @RequestMapping("/api/smewallets/orders")
 class OrderController : CRUDAbstract<Order>(){
+
+    @Autowired
+    lateinit var notificationMessage: SimpMessagingTemplate;
 
     @Autowired
     lateinit var orderRepository: OrderRepository
@@ -29,8 +33,15 @@ class OrderController : CRUDAbstract<Order>(){
     @PutMapping("/update")
     override fun update(@RequestBody anObject: Order): ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.save(anObject))
 
-    @GetMapping("findAll")
-    override fun findAll(): ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findAll())
+    @GetMapping("/findAll")
+    override fun findAll(): ResponseEntity<*> {
+
+        var result = JSONUtilsKT.ok(this.orderRepository.findAll())
+
+        notificationMessage.convertAndSend("/notification/orders/findAll", result)
+
+        return result
+    }
 
     @GetMapping("/findById/{id}")
     override fun findById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findById(id))
