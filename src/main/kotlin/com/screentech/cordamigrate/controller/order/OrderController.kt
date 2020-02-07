@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.messaging.simp.SimpMessagingTemplate
-import java.math.BigDecimal
+
 
 @RestController
 @RequestMapping("/api/smewallets/orders")
 class OrderController : CRUDAbstract<Order>(){
 
     @Autowired
-    lateinit var notificationMessage: SimpMessagingTemplate;
+    lateinit var notificationMessage: SimpMessagingTemplate
 
     @Autowired
     lateinit var orderRepository: OrderRepository
@@ -36,7 +36,7 @@ class OrderController : CRUDAbstract<Order>(){
     @GetMapping("/findAll")
     override fun findAll(): ResponseEntity<*> {
 
-        var result = JSONUtilsKT.ok(this.orderRepository.findAll())
+        val result = JSONUtilsKT.ok(this.orderRepository.findAll())
 
         notificationMessage.convertAndSend("/notification/orders/findAll", result)
 
@@ -44,7 +44,7 @@ class OrderController : CRUDAbstract<Order>(){
     }
 
     @GetMapping("/findById/{id}")
-    override fun findById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findById(id))
+    override fun findById(@PathVariable id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findById(id))
 
     @GetMapping("/findByIsbnNumber/{isbnNumber}")
     fun findByIsbnNumber(@PathVariable isbnNumber : String) : ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findByIsbnNumber(isbnNumber))
