@@ -38,7 +38,7 @@ class OrderController : CRUDAbstract<Order>(){
 
         val result = JSONUtilsKT.ok(this.orderRepository.findAll())
 
-        notificationMessage.convertAndSend("/topic/orders/findAll", result)
+        notificationMessage.convertAndSend("/topic/notification", result)
 
         return result
     }
