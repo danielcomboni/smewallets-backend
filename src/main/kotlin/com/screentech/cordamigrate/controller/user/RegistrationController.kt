@@ -28,6 +28,7 @@ class RegistrationController : CRUDAbstract<Registration>(){
     @PutMapping("/update")
     override fun update(@RequestBody anObject: Registration): ResponseEntity<*> {
         anObject.user.emailVerifiedAt = parseStringToTimestamp(anObject.user.emailVerifiedAtStr)
+        anObject.timestamp = parseStringToTimestamp(anObject.timestampStr)
         return JSONUtilsKT.ok(this.registrationRepository.save(anObject))
     }
 
