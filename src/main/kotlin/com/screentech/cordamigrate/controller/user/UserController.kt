@@ -26,7 +26,10 @@ class UserController : CRUDAbstract<User>(){
     }
 
     @PutMapping("/update")
-    fun updateAUser(@RequestBody user: User) : ResponseEntity<*> = JSONUtilsKT.ok(this.userRepository.save(user))
+    fun updateAUser(@RequestBody user: User) : ResponseEntity<*> {
+        user.emailVerifiedAt = parseStringToTimestamp(user.emailVerifiedAtStr)
+        return JSONUtilsKT.ok(this.userRepository.save(user))
+    }
 
     @DeleteMapping("/delete")
     fun deleteAUser(@RequestBody user: User) : ResponseEntity<*> = JSONUtilsKT.ok(this.userRepository.delete(user))

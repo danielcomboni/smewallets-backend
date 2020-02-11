@@ -39,6 +39,6 @@ class RegistrationController : CRUDAbstract<Registration>(){
     override fun findByEmail(@PathVariable email: String): ResponseEntity<*> = JSONUtilsKT.ok(this.registrationRepository.findRegistrationByEmail(email))
 
     @GetMapping("/findById/{id}")
-    override fun findById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.findById(id))
+    override fun findById(@PathVariable id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.findById(id))
 
 }
