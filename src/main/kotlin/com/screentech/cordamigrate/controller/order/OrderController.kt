@@ -24,18 +24,30 @@ class OrderController : CRUDAbstract<Order>(){
 
     @PostMapping("/create")
     override fun create(@RequestBody anObject: Order): ResponseEntity<*> {
+
         anObject.buyer?.emailVerifiedAt = parseStringToTimestamp(anObject.buyer?.emailVerifiedAtStr)
         anObject.supplier?.emailVerifiedAt = parseStringToTimestamp(anObject.supplier?.emailVerifiedAtStr)
         anObject.timestamp = getCurrentTimestampSQL()
-      return JSONUtilsKT.ok(this.orderRepository.save(anObject))
+
+        val result = JSONUtilsKT.ok(this.orderRepository.save(anObject))
+
+        this.notificationMessage.convertAndSend("/topic/orders/create", result)
+
+      return result
     }
 
     @PutMapping("/update")
     override fun update(@RequestBody anObject: Order): ResponseEntity<*> {
+
         anObject.buyer?.emailVerifiedAt = parseStringToTimestamp(anObject.buyer?.emailVerifiedAtStr)
         anObject.supplier?.emailVerifiedAt = parseStringToTimestamp(anObject.supplier?.emailVerifiedAtStr)
         anObject.timestamp = parseStringToTimestamp(anObject.timestampStr)
-        return  JSONUtilsKT.ok(this.orderRepository.save(anObject))
+
+        val result = JSONUtilsKT.ok(this.orderRepository.save(anObject))
+
+        this.notificationMessage.convertAndSend("/topic/orders/update", result);
+
+        return  result
     }
 
     @GetMapping("/findAll")
@@ -43,13 +55,20 @@ class OrderController : CRUDAbstract<Order>(){
 
         val result = JSONUtilsKT.ok(this.orderRepository.findAll())
 
-        notificationMessage.convertAndSend("/topic/notification", result);
+        notificationMessage.convertAndSend("/topic/orders/findAll", result);
 
         return result
     }
 
     @GetMapping("/findById/{id}")
-    override fun findById(@PathVariable id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findById(id))
+    override fun findById(@PathVariable id: Long): ResponseEntity<*> {
+
+        val result = JSONUtilsKT.ok(this.orderRepository.findById(id))
+
+        this.notificationMessage.convertAndSend("/topic/orders/findById", result)
+
+        return result
+    }
 
     @GetMapping("/findByIsbnNumber/{isbnNumber}")
     fun findByIsbnNumber(@PathVariable isbnNumber : String) : ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.findByIsbnNumber(isbnNumber))

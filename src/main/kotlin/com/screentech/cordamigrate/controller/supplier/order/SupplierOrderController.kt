@@ -8,6 +8,7 @@ import com.screentech.cordamigrate.utility.getCurrentTimestampSQL
 import com.screentech.cordamigrate.utility.parseStringToTimestamp
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
+import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.web.bind.annotation.*
 import java.math.BigDecimal
 
@@ -17,6 +18,9 @@ class SupplierOrderController : CRUDAbstract<SupplierOrder>(){
 
     @Autowired
     lateinit var supplierOrderRepository: SupplierOrderRepository
+
+    @Autowired
+    lateinit var notificationMessage: SimpMessagingTemplate
 
     fun getTheObject(anObject: SupplierOrder): SupplierOrder {
 
@@ -34,7 +38,11 @@ class SupplierOrderController : CRUDAbstract<SupplierOrder>(){
         var theObject = getTheObject(anObject)
         theObject.timestamp = getCurrentTimestampSQL()
 
-        return JSONUtilsKT.ok(this.supplierOrderRepository.save(theObject))
+        val result =  JSONUtilsKT.ok(this.supplierOrderRepository.save(theObject))
+
+        this.notificationMessage.convertAndSend("/topic/supplierOrders/create", result)
+
+        return result
 
     }
 
@@ -44,16 +52,36 @@ class SupplierOrderController : CRUDAbstract<SupplierOrder>(){
         anObject.timestamp = parseStringToTimestamp(anObject.timestampStr)
         var theObject = getTheObject(anObject)
         theObject.order.timestamp = parseStringToTimestamp(anObject.timestampStr)
-        
-        return JSONUtilsKT.ok(this.supplierOrderRepository.save(theObject))
+
+        val result = JSONUtilsKT.ok(this.supplierOrderRepository.save(theObject))
+
+        this.notificationMessage.convertAndSend("/topic/supplierOrders/update", result)
+
+        return result
 
     }
 
     @GetMapping("/findAll")
-    override fun findAll(): ResponseEntity<*> = JSONUtilsKT.ok(this.supplierOrderRepository.findAll())
+    override fun findAll(): ResponseEntity<*> {
 
-    @GetMapping("/findById/{id}")
-    override fun findById(@PathVariable id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.supplierOrderRepository.findById(id))
+        val result = JSONUtilsKT.ok(this.supplierOrderRepository.findAll())
+
+        this.notificationMessage.convertAndSend("/topic/supplierOrders/findAll", result)
+
+        return result
+
+    }
+
+    @GetMapping("/findSupplierOrderById/{id}")
+    override fun findById(@PathVariable id: Long): ResponseEntity<*> {
+
+        val result = JSONUtilsKT.ok(this.supplierOrderRepository.findById(id))
+
+        this.notificationMessage.convertAndSend("/topic/supplierOrders/findSupplierOrderById", result)
+
+        return result
+
+    }
 
 //    @GetMapping("findByEmail/{email}")
 //    override fun findByEmail(@PathVariable email: String): ResponseEntity<*>  = JSONUtilsKT.ok(this.supplierOrderRepository.findByEmail(email))
