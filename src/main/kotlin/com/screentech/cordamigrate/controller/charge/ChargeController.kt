@@ -29,6 +29,7 @@ class ChargeController : CRUDAbstract<Charge>() {
     override fun update(@RequestBody anObject: Charge): ResponseEntity<*>  {
         anObject.user.emailVerifiedAt = parseStringToTimestamp(anObject.user.emailVerifiedAtStr)
         anObject.wallet.timestamp = parseStringToTimestamp(anObject.wallet.timestampStr)
+        anObject.wallet.user?.emailVerifiedAt = parseStringToTimestamp(anObject.wallet.user?.emailVerifiedAtStr)
         return JSONUtilsKT.ok(this.chargeRepository.save(anObject))
     }
 
@@ -36,6 +37,6 @@ class ChargeController : CRUDAbstract<Charge>() {
     override fun findAll(): ResponseEntity<*>  = JSONUtilsKT.ok(this.chargeRepository.findAll())
 
     @GetMapping("/findById/{id}")
-    override fun findById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.chargeRepository.findById(id))
+    override fun findById(@PathVariable id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.chargeRepository.findById(id))
 
 }

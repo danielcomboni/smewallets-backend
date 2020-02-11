@@ -31,14 +31,19 @@ class OrderController : CRUDAbstract<Order>(){
     }
 
     @PutMapping("/update")
-    override fun update(@RequestBody anObject: Order): ResponseEntity<*> = JSONUtilsKT.ok(this.orderRepository.save(anObject))
+    override fun update(@RequestBody anObject: Order): ResponseEntity<*> {
+        anObject.buyer?.emailVerifiedAt = parseStringToTimestamp(anObject.buyer?.emailVerifiedAtStr)
+        anObject.supplier?.emailVerifiedAt = parseStringToTimestamp(anObject.supplier?.emailVerifiedAtStr)
+        anObject.timestamp = parseStringToTimestamp(anObject.timestampStr)
+        return  JSONUtilsKT.ok(this.orderRepository.save(anObject))
+    }
 
     @GetMapping("/findAll")
     override fun findAll(): ResponseEntity<*> {
 
         val result = JSONUtilsKT.ok(this.orderRepository.findAll())
 
-        notificationMessage.convertAndSend("/topic/notification", result)
+        notificationMessage.convertAndSend("/topic/notification", result);
 
         return result
     }
