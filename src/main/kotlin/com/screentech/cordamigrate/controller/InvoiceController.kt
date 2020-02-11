@@ -16,6 +16,7 @@ import com.screentech.cordamigrate.utility.JSONUtilsKT
 import com.screentech.cordamigrate.utility.parseStringToTimestamp
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
+import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.web.bind.annotation.*
 import java.math.BigDecimal
 
@@ -25,6 +26,10 @@ class InvoiceController : CRUDAbstract<Invoice>() {
 
     @Autowired
     lateinit var invoiceRepository: InvoiceRepository
+
+
+    @Autowired
+    lateinit var notificationMessage: SimpMessagingTemplate
 
     /**
      * Parses the string timestamp values of Invoice properties
@@ -47,7 +52,15 @@ class InvoiceController : CRUDAbstract<Invoice>() {
      * @return ResponseEntity
      */
     @PostMapping("/create")
-    override fun create(@RequestBody anObject: Invoice): ResponseEntity<*> = JSONUtilsKT.ok(this.invoiceRepository.save(this.parseTimestamps(anObject)))
+    override fun create(@RequestBody anObject: Invoice): ResponseEntity<*> {
+
+        val result = JSONUtilsKT.ok(this.invoiceRepository.save(this.parseTimestamps(anObject)))
+
+        this.notificationMessage.convertAndSend("/topic/invoices/create", result)
+
+        return result
+
+    }
 
     /**
      * updates / saves an invoice in the database
@@ -56,7 +69,15 @@ class InvoiceController : CRUDAbstract<Invoice>() {
      * @return ResponseEntity
      */
     @PutMapping("/update")
-    override fun update(@RequestBody anObject: Invoice): ResponseEntity<*>  = JSONUtilsKT.ok(this.invoiceRepository.save(parseTimestamps(anObject)))
+    override fun update(@RequestBody anObject: Invoice): ResponseEntity<*>  {
+
+        val result = JSONUtilsKT.ok(this.invoiceRepository.save(parseTimestamps(anObject)))
+
+        this.notificationMessage.convertAndSend("/topic/invoices/update", result)
+
+        return result
+
+    }
 
 
     /**
@@ -66,7 +87,15 @@ class InvoiceController : CRUDAbstract<Invoice>() {
      * @return ResponseEntity
      */
     @DeleteMapping("/delete/{id}")
-    override fun deleteById(id: Long): ResponseEntity<*> = JSONUtilsKT.ok(this.invoiceRepository.deleteById(id))
+    override fun deleteById(id: Long): ResponseEntity<*> {
+
+        val result = JSONUtilsKT.ok(this.invoiceRepository.deleteById(id))
+
+        this.notificationMessage.convertAndSend("/topic/invoices/delete", result)
+
+        return result
+
+    }
 
     /**
      * deletes a row /record of invoice in the database.
@@ -75,6 +104,14 @@ class InvoiceController : CRUDAbstract<Invoice>() {
      * @return ResponseEntity
      */
     @DeleteMapping("/delete")
-    override fun deleteByObject(@RequestBody anObject: Invoice): ResponseEntity<*> = JSONUtilsKT.ok(this.invoiceRepository.delete(anObject))
+    override fun deleteByObject(@RequestBody anObject: Invoice): ResponseEntity<*> {
+
+        val result = JSONUtilsKT.ok(this.invoiceRepository.delete(anObject))
+
+//        this.notificationMessage.convertAndSend("/topic/invoices/delete", result)
+
+        return result
+
+    }
 
 }
