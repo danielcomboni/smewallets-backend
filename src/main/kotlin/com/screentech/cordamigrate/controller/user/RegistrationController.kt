@@ -30,7 +30,7 @@ class RegistrationController : CRUDAbstract<Registration>(){
 
         val result = JSONUtilsKT.ok(this.registrationRepository.save(anObject))
 
-        this.notificationMessage.convertAndSend("/topic/registrations/create")
+        this.notificationMessage.convertAndSend("/topic/registrations/create", result)
 
         return result
     }
